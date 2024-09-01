@@ -1,0 +1,30 @@
+def custom_count(string: str, substring: str, allow_overlap: bool = False) -> int:
+    # Handle edge case: empty substring
+    if substring == "":
+        return len(string) + 1
+
+    count = 0
+    start = 0
+
+    while True:
+        # Find the next occurrence of the substring in the string
+        start = string.find(substring, start)
+
+        # If no more occurrences are found, break the loop
+        if start == -1:
+            break
+
+        # Increment the count when a match is found
+        count += 1
+
+        # If overlap is allowed, move the starting index by 1
+        # Otherwise, skip to the end of the current match
+        start += 1 if allow_overlap else len(substring)
+
+    return count
+
+# Test cases
+print(custom_count("sggs", "gg"))          
+print(custom_count("aaaa", "aa", True))    
+print(custom_count("hello", ""))           
+print(custom_count("hi", "hello"))         

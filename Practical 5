@@ -1,0 +1,94 @@
+def ends_with_a(text):
+    return "Accepted" if text.endswith('a') else "Rejected"
+def base(text, text_base, output_base):
+    if not (2 <= text_base <= 36) or not (2 <= output_base <= 36):
+        raise ValueError('Base must be between 2 and 36')
+
+    try:
+        dec = int(text, text_base)
+    except ValueError:
+        raise ValueError('Invalid number for the given base')
+
+    if dec == 0:
+        return '0'
+
+    digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    res = ''
+    while dec > 0:
+        rem = dec % output_base
+        res = digits[rem] + res
+        dec //= output_base
+
+    return res
+def con1(object):
+    return slice_string(object, 0, len(object), 1)
+
+def con2(object, slicing_parameter):
+    return slice_string(object, slicing_parameter[0], slicing_parameter[1], slicing_parameter[2])
+def intToRoman(num: int) -> str:
+    if not (0 < num < 4000):
+        raise ValueError('Number must be between 1 and 3999')
+
+    values = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]
+    symbols = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C', 'CD', 'D', 'CM', 'M']
+    result = ''
+    
+    for value, symbol in zip(reversed(values), reversed(symbols)):
+        while num >= value:
+            result += symbol
+            num -= value
+
+    return result
+def ends_with_a(text):
+    return "Accepted" if text.endswith('a') else "Rejected"
+
+def base(text, text_base, output_base):
+    if not (2 <= text_base <= 36) or not (2 <= output_base <= 36):
+        raise ValueError('Base must be between 2 and 36')
+
+    try:
+        dec = int(text, text_base)
+    except ValueError:
+        raise ValueError('Invalid number for the given base')
+
+    if dec == 0:
+        return '0'
+
+    digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    res = ''
+    while dec > 0:
+        rem = dec % output_base
+        res = digits[rem] + res
+        dec //= output_base
+
+    return res
+
+def slice_string(object, start, end, step):
+    return object[start:end:step]
+
+def con1(object):
+    return slice_string(object, 0, len(object), 1)
+
+def con2(object, slicing_parameter):
+    return slice_string(object, slicing_parameter[0], slicing_parameter[1], slicing_parameter[2])
+
+def intToRoman(num: int) -> str:
+    if not (0 < num < 4000):
+        raise ValueError('Number must be between 1 and 3999')
+
+    values = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]
+    symbols = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C', 'CD', 'D', 'CM', 'M']
+    result = ''
+    
+    for value, symbol in zip(reversed(values), reversed(symbols)):
+        while num >= value:
+            result += symbol
+            num -= value
+
+    return result
+
+# Test cases
+print(intToRoman(56))  # Output: LVI
+print(con2("programming", [len("programming") - 1, -1, -1]))  # Output: gnimmargorp
+print(base('1100', 2, 16))  # Output: C
+print(ends_with_a("babaabbaba"))  # Output: Rejected

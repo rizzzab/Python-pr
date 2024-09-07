@@ -1,0 +1,73 @@
+def binary_to_decimal(binary_str):
+    """Convert a binary string to a decimal integer."""
+    decimal = 0
+    for bit in binary_str:
+        decimal = decimal * 2 + int(bit)
+    return decimal
+
+def decimal_to_binary(decimal_num, length):
+    """Convert a decimal integer to a binary string with a given length."""
+    if decimal_num == 0:
+        return '0'.zfill(length)
+    
+    binary_str = ''
+    while decimal_num > 0:
+        binary_str = str(decimal_num % 2) + binary_str
+        decimal_num //= 2
+    
+    # Pad with leading zeros to match the required length
+    return binary_str.zfill(length)
+
+def binary_subtraction_step_by_step(bin1, bin2):
+    """
+    Subtracts the second binary number from the first binary number and displays each step.
+    
+    Parameters:
+    bin1 (str): The first binary number as a string.
+    bin2 (str): The second binary number as a string.
+    
+    Returns:
+    str: The result of the subtraction as a binary number.
+    """
+    # Ensure both binary numbers are of equal length
+    max_len = max(len(bin1), len(bin2))
+    bin1 = bin1.zfill(max_len)
+    bin2 = bin2.zfill(max_len)
+    
+    # Initialize the result and borrow
+    result = []
+    borrow = 0
+    
+    print(f"Initial binary numbers:\n  {bin1}\n- {bin2}")
+    
+    # Process each bit from right to left
+    for i in range(max_len - 1, -1, -1):
+        bit1 = int(bin1[i])
+        bit2 = int(bin2[i])
+        
+        # Subtract bits considering the borrow
+        diff = bit1 - bit2 - borrow
+        
+        if diff < 0:
+            diff += 2
+            borrow = 1
+        else:
+            borrow = 0
+        
+        result.append(str(diff))
+        
+        # Print the current step
+        step_result = ''.join(reversed(result))
+        print(f"Step {max_len - i}: Borrow = {borrow}, Result so far = {step_result.zfill(max_len)}")
+    
+    # Reverse the result to get the final binary string
+    final_result = ''.join(reversed(result)).lstrip('0') or '0'
+    
+    print(f"Final result: {final_result}")
+    
+    return final_result
+
+# Example usage:
+bin1 = '1100'  # Binary for 12
+bin2 = '1010'  # Binary for 10
+result = binary_subtraction_step_by_step(bin1, bin2)

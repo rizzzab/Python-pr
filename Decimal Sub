@@ -1,0 +1,28 @@
+def subtract_strings(num1_str, num2_str):
+    """Subtract two decimal numbers represented as strings."""
+    try:
+        # Convert strings to float to handle decimals and perform subtraction
+        num1 = float(num1_str)
+        num2 = float(num2_str)
+    except ValueError:
+        return "Invalid input: Please enter valid numbers."
+    
+    # Perform the subtraction
+    result = num1 - num2
+    
+    # Format result to remove unnecessary decimal places if not needed
+    if result.is_integer():
+        result = int(result)
+    
+    return str(result)
+
+def get_input_and_subtract():
+    """Take inputs from the user and subtract the numbers."""
+    num1_str = input("Enter the first number: ")
+    num2_str = input("Enter the second number: ")
+
+    result = subtract_strings(num1_str, num2_str)
+    print(f"Result: {result}")
+
+# Example usage
+get_input_and_subtract()

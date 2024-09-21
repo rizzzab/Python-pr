@@ -1,0 +1,38 @@
+def check_validity(text: str) -> str:
+    # Define the valid pairs of brackets
+    opening_brackets = "({[<"
+    closing_brackets = ")}]>"
+    bracket_map = {')': '(', '}': '{', ']': '[', '>': '<'}
+    
+    # Stack to keep track of open brackets
+    stack = []
+    
+    # Iterate over each character in the text
+    for char in text:
+        # If it's an opening bracket, push it to the stack
+        if char in opening_brackets:
+            stack.append(char)
+        # If it's a closing bracket, check if it matches the top of the stack
+        elif char in closing_brackets:
+            if not stack:
+                return f"Invalid: Closing bracket '{char}' without matching opening bracket."
+            if stack[-1] == bracket_map[char]:
+                stack.pop()  # Pop the matching opening bracket
+            else:
+                return f"Invalid: Mismatched bracket for '{char}'"
+        # Check for invalid characters (anything that's not a number, symbol, or bracket)
+        elif not char.isdigit() and not char.isalpha() and char not in "+-*/= ":
+            return f"Invalid: Unexpected character '{char}'"
+    
+    # After processing all characters, ensure there are no unmatched opening brackets
+    if stack:
+        return "Invalid: Unmatched opening brackets."
+    
+    return "Valid"
+
+# Test cases
+print(check_validity("(<>[])"))   # Valid
+print(check_validity("{1}"))      # Invalid: Unmatched opening brackets.
+print(check_validity("(>"))       # Invalid: Mismatched bracket for '>'
+print(check_validity("+()"))      # Valid
+print(check_validity("(<)>"))     # Invalid: Mismatched bracket for ')'

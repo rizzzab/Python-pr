@@ -1,0 +1,13 @@
+import random
+n=random.randrange(1,10)
+guess = int(input("Enter the number:"))
+while n!=guess:
+     if n > guess:
+     	print("you have guessed it a bit high")
+     	guess =int(input("Enter the number"))
+     elif n < guess:
+     	print("Ypu have guessed it a bit low")
+     	guess = int(input("Enter the number:"))
+     else:
+     	break
+print("You guessed it correctly")

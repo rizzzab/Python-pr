@@ -1,9 +1,0 @@
-def module (a,b):
-	no1 = a
-	n02 = b
-	n03 = a//b
-	n04 = b*n03
-	n05 = a - n04
-	return (n05)
-
-print(module(-0,5))

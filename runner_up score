@@ -1,6 +1,0 @@
- n = int(input())
-    arr = list(map(int, input().split()))
-    unique_scores=list(set(arr))
-    unique_scores.sort(reverse=True)
-    runner_up=unique_scores[1]
-    print(runner_up)
